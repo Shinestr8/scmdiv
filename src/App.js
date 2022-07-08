@@ -53,7 +53,7 @@ function App() {
           {loading && (
             <>
               <div>{loadingMessages[Math.floor((Math.random() * loadingMessages.length))]}</div>
-              <img className="cogger" alt="cogger"src={process.env.PUBLIC_URL + 'cogger.webp'}/>
+              <img className="cogger" alt="cogger"src={process.env.PUBLIC_URL + '/cogger.webp'}/>
             </>
             
           )}
@@ -63,7 +63,7 @@ function App() {
               <p>Player count: {cupge.players}</p>
               <p>Highest pos for type 2: <strong>{Math.floor(cupge.players*0.1/64)*64}</strong></p>
               <p>Highest pos for type 3: <strong>{Math.floor(cupge.players*0.25/64)*64}</strong></p>
-              <p>div {Math.floor(cupge.players*0.1/64)+1} players <img className="pepepoint" alt="pepepoint"src={process.env.PUBLIC_URL + '25.webp'}/></p>
+              <p>div {Math.floor(cupge.players*0.1/64)+1} players <img className="pepepoint" alt="pepepoint"src={process.env.PUBLIC_URL + '/25.webp'}/></p>
             </>
             
           )}
