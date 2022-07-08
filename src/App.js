@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const page_background = process.env.PUBLIC_URL + Math.floor((Math.random() * 25)) + '.webp';
+const page_background = process.env.PUBLIC_URL + "/" +  Math.floor((Math.random() * 25)) + '.webp';
 
 
 function App() {
