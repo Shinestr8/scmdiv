@@ -28,7 +28,7 @@ function App() {
       setLoading(true);
       try {
         let response = await fetch(
-          "https://tm-stats-bknd.herokuapp.com/currentcup"
+          "https://polite-conkies-75f54b.netlify.app/.netlify/functions/api/currentcup"
         );
         response = await response.json();
 
