@@ -1,27 +1,23 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import { formatDate } from "./helper/formatDate";
+import { loadingMessages } from "./data/messages";
+import { backgroundIds } from "./data/background";
 
-const page_background = `${process.env.PUBLIC_URL}/${Math.floor(
-  Math.random() * 25
-)}.webp`;
+console.log(backgroundIds.length);
+const number = Math.floor(Math.random() * backgroundIds.length);
+const page_background = `https://cdn.7tv.app/emote/${backgroundIds[number].id}/4x.webp`;
+const pepePoint = `https://cdn.7tv.app/emote/${
+  backgroundIds.find((img) => img.name === "pepepoint").id
+}/1x.webp`;
+const cogger = `https://cdn.7tv.app/emote/${
+  backgroundIds.find((img) => img.name === "COGGERS").id
+}/4x.webp`;
 
-function App() {
+const App = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cupge, setCupge] = useState(null);
-
-  const loadingMessages = [
-    "Processing the scam...",
-    "Dingsing the dongs...",
-    "Keoso the silver 3 KEKL...",
-    "AT Medal could be a bit more challenging...",
-    "mhm?",
-    "Checking scam...",
-    "Feel free to give me inspiration for some loading message Shkofus",
-    "Scamfus ?",
-    "Loading message edit 9...",
-    "Support me on paypal or rito",
-  ];
 
   useEffect(() => {
     async function fetchData() {
@@ -41,15 +37,14 @@ function App() {
 
   useEffect(() => {
     if (data) {
-      for (let i = 0; i < data.length; ++i) {
-        if (data[i].name.includes("#1")) {
-          setCupge(data[i]);
-          document.title = `div ${
-            Math.floor((data[i].players * 0.1) / 64) + 1
-          } pepepoint`;
-          break;
-        }
-      }
+      const now = new Date();
+      const latestCup = data.find((cup) => {
+        return cup.name === `COTD ${formatDate(now)} #1`;
+      });
+      setCupge(latestCup);
+      document.title = `div ${
+        Math.floor((latestCup.players * 0.1) / 64) + 1
+      } pepepoint`;
     }
   }, [data]);
 
@@ -74,7 +69,7 @@ function App() {
             <img
               className="cogger"
               alt="cogger"
-              src={process.env.PUBLIC_URL + "/cogger.webp"}
+              src={cogger}
             />
           </>
         )}
@@ -98,11 +93,7 @@ function App() {
             </p>
             <p>
               div {Math.floor((cupge.players * 0.1) / 64) + 1} players{" "}
-              <img
-                className="pepepoint"
-                alt="pepepoint"
-                src={process.env.PUBLIC_URL + "/25.webp"}
-              />
+              <img alt="pepePoint" src={pepePoint} />
             </p>
           </>
         ) : (
@@ -111,6 +102,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
