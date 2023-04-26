@@ -4,7 +4,6 @@ import { formatDate } from "./helper/formatDate";
 import { loadingMessages } from "./data/messages";
 import { backgroundIds } from "./data/background";
 
-console.log(backgroundIds.length);
 const number = Math.floor(Math.random() * backgroundIds.length);
 const page_background = `https://cdn.7tv.app/emote/${backgroundIds[number].id}/4x.webp`;
 const pepePoint = `https://cdn.7tv.app/emote/${
@@ -36,17 +35,19 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (data) {
-      const now = new Date();
-      const latestCup = data.find((cup) => {
-        return cup.name === `COTD ${formatDate(now)} #1`;
-      });
-      setCupge(latestCup);
-      document.title = `div ${
-        Math.floor((latestCup.players * 0.1) / 64) + 1
-      } pepepoint`;
-    }
+    if (!data) return;
+    const now = new Date();
+    const latestCup = data.find((cup) => {
+      return cup.name === `COTD ${formatDate(now)} #1`;
+    });
+    setCupge(latestCup);
+    document.title = `div ${
+      Math.floor(Math.round(latestCup.players * 0.1) / 64) + 1
+    } pepepoint`;
   }, [data]);
+
+  const type2 = cupge && Math.floor(Math.round(cupge.players * 0.1) / 64);
+  const type3 = cupge && Math.floor(Math.round(cupge.players * 0.25) / 64);
 
   return (
     <div
@@ -66,11 +67,7 @@ const App = () => {
                 ]
               }
             </div>
-            <img
-              className="cogger"
-              alt="cogger"
-              src={cogger}
-            />
+            <img className="cogger" alt="cogger" src={cogger} />
           </>
         )}
         {data && cupge ? (
@@ -78,22 +75,16 @@ const App = () => {
             <h1>{cupge.name}</h1>
             <p>Player count: {cupge.players}</p>
             <p>
-              Highest pos for type 2:{" "}
-              <strong>
-                {Math.floor((cupge.players * 0.1) / 64) * 64} (div{" "}
-                {Math.floor((cupge.players * 0.1) / 64)})
-              </strong>
+              Highest pos for type 2:&nbsp;
+              <strong>{`${type2 * 64} (div ${type2})`}</strong>
             </p>
             <p>
-              Highest pos for type 3:{" "}
-              <strong>
-                {Math.floor((cupge.players * 0.25) / 64) * 64} (div{" "}
-                {Math.floor((cupge.players * 0.25) / 64)})
-              </strong>
+              Highest pos for type 3:&nbsp;
+              <strong>{`${type3 * 64} (div ${type3})`}</strong>
             </p>
             <p>
-              div {Math.floor((cupge.players * 0.1) / 64) + 1} players{" "}
-              <img alt="pepePoint" src={pepePoint} />
+              {`div ${type2 + 1} players `}
+              <img className="pepepoint" alt="pepepoint" src={pepePoint} />
             </p>
           </>
         ) : (
