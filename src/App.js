@@ -4,7 +4,7 @@ import { formatDate } from "./helper/formatDate";
 import { loadingMessages } from "./data/messages";
 import { backgroundIds } from "./data/background";
 
-const number = Math.floor(Math.random() * backgroundIds.length);
+const number = Math.floor(Math.random() * backgroundIds.length + 1);
 const page_background = `https://cdn.7tv.app/emote/${backgroundIds[number].id}/4x.webp`;
 const pepePoint = `https://cdn.7tv.app/emote/${
   backgroundIds.find((img) => img.name === "pepepoint").id
