@@ -41,9 +41,9 @@ const App = () => {
       return cup.name === `COTD ${formatDate(now)} #1`;
     });
     setCupge(latestCup);
-    document.title = `div ${
-      Math.floor(Math.round(latestCup.players * 0.1) / 64) + 1
-    } pepepoint`;
+    document.title = latestCup ? `div ${
+      latestCup && Math.floor(Math.round(latestCup.players * 0.1) / 64) + 1
+    } pepepoint` : 'Waiting for next cupge';
   }, [data]);
 
   const type2 = cupge && Math.floor(Math.round(cupge.players * 0.1) / 64);
@@ -88,7 +88,7 @@ const App = () => {
             </p>
           </>
         ) : (
-          <div>Eh mhm?</div>
+          <div>Waiting for next copeh</div>
         )}
       </div>
     </div>
